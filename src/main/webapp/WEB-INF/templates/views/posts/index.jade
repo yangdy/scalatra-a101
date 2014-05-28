@@ -1,0 +1,19 @@
+-@ val posts: List[io.yangdy.models.Post]
+
+- attributes("title") = "Posts"
+- attributes("headline") = "All Posts"
+
+table
+  th
+    td Title
+    td Content
+    td
+    td
+    td
+  - for(post <- posts)
+    tr
+      td= post.title
+      td= post.content
+      td show
+      td edit
+      td delete
