@@ -29,7 +29,8 @@ object TemplateBuild extends Build {
         "ch.qos.logback" % "logback-classic" % "1.1.2" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "8.1.10.v20130312" % "container",
         "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "container;provided;test" 
-          artifacts (Artifact("javax.servlet", "jar", "jar"))
+          artifacts (Artifact("javax.servlet", "jar", "jar")),
+        "com.typesafe.slick" %% "slick" % "2.0.2"
       ),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile){ base =>
         Seq(
