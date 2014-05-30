@@ -1,0 +1,46 @@
+-@ val users: List[io.yangdy.model.User]
+- attributes("title") = "/users"
+- attributes("headline") = "List all users"
+
+table
+  th
+    td Id
+    td Username
+    td Email
+    td Password
+    td Avatar URL
+    td Create Time
+    td Update Time
+    td Last Login
+    td
+    td
+    td
+  - for (user <- users)
+    tr
+      td= user.id.getOrElse("None")
+      td= user.name
+      td= user.email
+      td= user.password_hash
+      td= user.avatar_url.getOrElse("None")
+      td= user.created_at
+      td= user.updated_at
+      td= user.last_login.getOrElse("None")
+      td
+        a(href="/users/#{user.id.get}") Show
+      td
+        a(href="#") Edit
+      td
+        a(href="#") Delete
+
+form(action="/users" method="post")
+  label Username
+  input(type="text" name="username")
+  br
+  label Email
+  input(type="text" name="email")
+  br
+  label Password
+  input(type="password" name="password")
+  br
+  input(type="submit" value="New User")
+

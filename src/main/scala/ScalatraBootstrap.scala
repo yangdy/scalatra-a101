@@ -3,8 +3,11 @@ import org.slf4j.LoggerFactory
 import scala.slick.session.Database
 import org.scalatra._
 import javax.servlet.ServletContext
+import javax.servlet.DispatcherType
+import java.util.EnumSet
 
 import io.yangdy.app._
+import io.yangdy.service._
 
 class ScalatraBootstrap extends LifeCycle {
 
@@ -15,8 +18,17 @@ class ScalatraBootstrap extends LifeCycle {
 
   override def init(context: ServletContext) {
     val db = Database.forDataSource(cpds)
+
+    db withSession {
+      UserService.createUserTable
+    }
+
+    context.addFilter("transactionFilter", new TransactionFilter(db))
+    context.getFilterRegistration("transactionFilter")
+      .addMappingForUrlPatterns(EnumSet.allOf(classOf[DispatcherType]), true, "/*")
+
+    context.mount(new UsersController, "/users/*")
     context.mount(new MyScalatraServlet, "/*")
-    context.mount(new PostController, "/posts/*")
   }
 
   private def closeDbConnection() {

@@ -22,6 +22,7 @@ object TemplateBuild extends Build {
       scalaVersion := ScalaVersion,
       resolvers += "Sonatype OSS Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
       resolvers += "Akka Repo" at "http://repo.akka.io/repository",
+      scalacOptions := Seq("-deprecation", "-language:postfixOps", "-feature"),
       libraryDependencies ++= Seq(
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,

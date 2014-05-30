@@ -33,4 +33,8 @@ trait MyScalatraServletStack extends ScalatraServlet with ScalateSupport {
       layoutTemplate(path)
     } orElse serveStaticResource() getOrElse resourceNotFound()
   }
+
+  protected def NotFound() = {
+    org.scalatra.NotFound()
+  }
 }

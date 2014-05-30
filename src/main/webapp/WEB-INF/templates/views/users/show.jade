@@ -1,0 +1,14 @@
+-@ val user: io.yangdy.model.User
+- attributes("title") = "/users/${user.id.get}"
+- attributes("headline") = "Show user"
+
+p= user.id.getOrElse("None")
+p= user.name
+p= user.email
+p= user.password_hash
+p= user.avatar_url.getOrElse("None")
+p= user.created_at
+p= user.updated_at
+p= user.last_login.getOrElse("None")
+
+a(href="/users") Back
